@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahom — Privacy statement</title>
+<meta name="description" content="How Ahom handles your information: it doesn't. Ahom is a local-first desktop email client — your mail lives encrypted on your own device, with no Ahom server in the data path.">
+<meta name="theme-color" content="#0d1017">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%E2%9C%89%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="wordmark" href="index.html" aria-label="Ahom home">ahom<span class="dot">.</span></a>
+    <div class="nav__links">
+      <a href="index.html#promise" class="nav__hide">Why Ahom</a>
+      <a href="index.html#features" class="nav__hide">Features</a>
+      <a href="privacy.html" aria-current="page">Privacy</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme" title="Switch theme">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a href="index.html#download" class="nav__cta">Download</a>
+    </div>
+  </div>
+</nav>
+
+<header class="legal-hero">
+  <div class="legal-hero__glow" aria-hidden="true"></div>
+  <div class="wrap legal-hero__inner">
+    <p class="kicker">Privacy</p>
+    <h1 class="legal-title">Privacy statement</h1>
+    <p class="legal-lede">Ahom is a desktop mail client that runs entirely on your device. There is no Ahom server, no Ahom account, and no Ahom backend in the data path — so most of this document is about the things Ahom deliberately does <em>not</em> do.</p>
+    <div class="legal-meta">
+      <span class="tag">Version <b>1.9</b></span>
+      <span class="tag">Effective <b>September 5, 2026</b></span>
+      <span class="tag">A product of <b>Plenith&nbsp;LLC</b></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="legal-content">
+    <nav class="toc" aria-label="Contents">
+      <h2>On this page</h2>
+      <ol>
+        <li><a href="#collect">What Ahom collects</a></li>
+        <li><a href="#lives">Where your data lives</a></li>
+        <li><a href="#use">How information is used</a></li>
+        <li><a href="#sharing">Data sharing</a></li>
+        <li><a href="#providers">Provider data flows &amp; OAuth scopes</a></li>
+        <li><a href="#tracking">Cookies and tracking</a></li>
+        <li><a href="#bimi">Verified sender logos (BIMI)</a></li>
+        <li><a href="#security">Security measures</a></li>
+        <li><a href="#rights">Your rights and controls</a></li>
+        <li><a href="#logs">Logs</a></li>
+        <li><a href="#gdpr">International users and GDPR</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+
+    <div class="callout callout--good">
+      <span class="callout__label">The short version</span>
+      <p>Ahom collects nothing about you. Your mail is stored, encrypted, on your own machine. AI features run on your device. Nothing is sent to Ahom, because there is no Ahom server to send it to. If a section below sounds short, it is short on purpose — the substance is “Ahom does not do that thing.”</p>
+    </div>
+
+    <h2 id="collect">What Ahom collects</h2>
+    <p>Ahom collects nothing about you. There is no telemetry, no analytics, no crash reporting, no usage metrics, no install pings, and no remote configuration service. The binary you install does not phone home.</p>
+    <p>The app reads, writes, displays, indexes, and stores mail on your device, on your behalf, using credentials you supply. None of that data is transmitted to any infrastructure operated by Ahom or Plenith LLC, because no such infrastructure exists.</p>
+
+    <h2 id="lives">Where your data lives</h2>
+    <p>Everything stays on the device where Ahom is installed:</p>
+    <ul>
+      <li><strong>Mail content</strong> (headers, bodies, attachments, drafts, search index) is stored in a single database file in your application-data directory, encrypted at rest with SQLCipher using AES-256. The encryption key is generated on first launch and sealed in the operating-system keychain — Windows Credential Manager, macOS Keychain, or libsecret on Linux. The key never lands on disk in plaintext.</li>
+      <li><strong>Attachments</strong> live inside that same encrypted database — no separate plaintext blob directory on disk, so a stolen disk image yields zero plaintext attachment bytes. Attachment <em>bytes</em> are fetched on demand from your provider only when you open or save a file; they are never pre-downloaded for offline use.</li>
+      <li><strong>OAuth refresh tokens</strong> for Gmail and Microsoft accounts are sealed in the same OS keychain. Plain IMAP / SMTP passwords, when you use them, are also stored in the keychain — never in the database, never in a config file.</li>
+      <li><strong>PGP private keys</strong> are double-protected: passphrase-wrapped using OpenPGP S2K (you set the passphrase at key generation), then stored inside the encrypted database. Compromising one layer alone does not yield the key.</li>
+      <li><strong>UI preferences</strong> (theme, density, sidebar width) live in browser-side local storage and contain no mail content.</li>
+      <li><strong>Local-AI model files</strong> live in a <code>models/</code> subdirectory of the application-data directory — next to the mail database, not in the install directory. They are downloaded once, verified against a pinned SHA-256, and contain no prompts, responses, or mail content.</li>
+    </ul>
+    <p>Uninstalling the app and deleting the application-data directory removes every byte of mail content the app has ever stored, and the model files with it — one step, nothing left behind.</p>
+
+    <h2 id="use">How information is used</h2>
+    <p>Information is used to operate the app on your behalf: rendering the inbox, opening threads, running search, generating thread summaries, drafting replies, classifying mail into buckets, and sending what you compose. Every one of those operations runs on your device against the local database.</p>
+    <p>Local AI features (summary, draft, natural-language search, smart-inbox classification) run against a language model on your own machine. The app’s <strong>Engine</strong> setting controls which runtime serves them:</p>
+    <ul>
+      <li><strong>Embedded</strong> (default) — the model is loaded inside the app’s own process and runs inline. There is no HTTP listener on this path: no socket the OS, another process, or a port scanner could observe. No prompt, message, or response leaves the device.</li>
+      <li><strong>External</strong> — you pin the app to your own local runtime (LM Studio, Ollama, or another OpenAI-compatible endpoint). Pointing it at a non-loopback URL is the only setting that causes AI payloads to leave the device, and a per-feature badge surfaces that before any call.</li>
+    </ul>
+    <p>In every case other than a non-loopback External URL, AI traffic stays on the device — either as in-process function calls or as loopback HTTP to a local runtime on your own machine.</p>
+
+    <h2 id="sharing">Data sharing</h2>
+    <p>Ahom does not share your data with anyone, because Ahom does not have your data. The app communicates with a small set of endpoints, all controlled or chosen by you:</p>
+    <ol>
+      <li><strong>Mail providers you connected</strong> — Gmail, Microsoft Graph, and the IMAP / SMTP servers you configured. Traffic on this path is what every mail client sends: authenticated API and mail-protocol sessions over TLS.</li>
+      <li><strong>A local AI endpoint (External engine only)</strong> — HTTP calls to whatever base URL you configured, loopback by default. The Embedded engine uses no HTTP at all. The default configuration sends nothing.</li>
+      <li><strong>Model downloads</strong> — the local chat model, and the optional semantic-search embedding model, are fetched once from a public model host as ordinary anonymous HTTPS downloads, each pinned to a SHA-256 the app verifies. Neither request carries an account, an identifier, information about you, or anything about your mail.</li>
+      <li><strong>A shared-drafts relay you configure (optional)</strong> — if you use real-time draft collaboration, change data is end-to-end encrypted (AES-256-GCM) under a key the relay never sees; the relay only routes ciphertext. There is no Ahom-operated relay — you self-host or trust one you choose, and the default install has none.</li>
+      <li><strong>Verified sender logos (BIMI), when enabled</strong> — for a sender whose message passed authentication, the app fetches that organization’s published logo from the organization’s own server, never through any third-party aggregator. See below.</li>
+    </ol>
+    <p>There are no advertising networks, no third-party SDKs, no fingerprinters, no identifiers, and no marketing pixels in the app.</p>
+
+    <h2 id="providers">Provider data flows &amp; OAuth scopes</h2>
+    <p>When you connect an account, mail data flows directly between your device and the provider — never through Ahom.</p>
+    <ul>
+      <li><strong>Gmail.</strong> OAuth 2.0 with PKCE on a loopback redirect. Scopes requested: <code>https://www.googleapis.com/auth/gmail.readonly</code> (list and read messages and threads) and <code>https://www.googleapis.com/auth/gmail.send</code> (send mail you compose in the app). Ahom requests no scope that would let it delete your mail or change your account settings. The refresh token is sealed in the OS keychain and used only to talk to Google from your device. Ahom does not transfer Google user data to any server, does not use it for advertising, and does not use it to train any model.</li>
+      <li><strong>Microsoft 365 / Outlook.</strong> OAuth 2.0 against the <code>common</code> tenant. Scopes requested up front: <code>Mail.Read</code>, <code>Mail.ReadWrite</code> (move messages between folders for triage), <code>Mail.Send</code>, <code>User.Read</code> (resolve the signed-in mailbox identity), and <code>offline_access</code> (issue a refresh token). All are presented on Microsoft’s consent screen when you first connect. The refresh token rotates on every refresh and is sealed in the OS keychain.</li>
+      <li><strong>iCloud, Fastmail, Yahoo, and generic IMAP / SMTP.</strong> Credentials you provide (typically an app-specific password for iCloud and Yahoo) are sealed in the OS keychain. The app talks IMAP and SMTP directly to the host you configured, over TLS via the system trust roots.</li>
+    </ul>
+    <p>Your use of each provider is governed by that provider’s own privacy policy. You control how much mail is fetched: sync can be bounded by count and by recency, and those bounds only ever <em>reduce</em> what the app requests from a provider.</p>
+
+    <h2 id="tracking">Cookies and tracking</h2>
+    <p>Ahom is a native desktop application, not a website. There are no cookies and no tracking pixels in the app’s own interface. Remote images in inbound mail are blocked by default to defeat third-party tracking pixels, and known-tracker beacons are stripped at the sanitize layer even when you choose to load images for a specific message.</p>
+
+    <h2 id="bimi">Verified sender logos (BIMI)</h2>
+    <p>BIMI (Brand Indicators for Message Identification) lets an organization publish a logo, tied to email authentication, so genuine mail can display its brand mark. Ahom supports it so that a real message from, say, your bank can show the bank’s verified logo — a positive authenticity signal you can see at a glance. Because it makes a new kind of network request, here is exactly how it is minimized:</p>
+    <ul>
+      <li><strong>Authentication gate.</strong> A logo is only ever fetched or shown for a message that <em>passed DMARC</em>. Unauthenticated, failing, or phishing/untrusted mail never shows a logo — it shows sender initials.</li>
+      <li><strong>Fetched at sync time, not on open.</strong> The logo is resolved in the background when mail is synced, once per sender domain — never when you open or read a message. The request therefore never reveals <em>which</em> message you read or when.</li>
+      <li><strong>Cached locally, brand’s own server only.</strong> The logo is stored in your encrypted database and reused; the fetch is HTTPS-only, size- and time-limited, follows no redirects, and comes only from the address the sending domain publishes in its own DNS. Ahom never uses a third-party “logo for any domain” service.</li>
+      <li><strong>A real setting.</strong> “Show verified sender logos” (Settings → Appearance) defaults on; turning it off stops every logo fetch and shows initials instead.</li>
+    </ul>
+    <p>What never leaves your device for this feature: your mail, subjects, contacts, account identity, and which messages you open. The only thing a brand’s server can infer is that some account received authenticated mail from their domain — which they already knew, because they sent it.</p>
+
+    <h2 id="security">Security measures</h2>
+    <ul>
+      <li><strong>At rest:</strong> SQLCipher with AES-256 wraps the entire mail database; the master key is sealed in the OS keychain.</li>
+      <li><strong>Credentials:</strong> OAuth refresh tokens, IMAP / SMTP passwords, and the database master key all live in the OS keychain.</li>
+      <li><strong>PGP private keys:</strong> double-encrypted — passphrase-wrapped via OpenPGP S2K before the database sees them.</li>
+      <li><strong>End-to-end:</strong> when both you and your correspondent have OpenPGP keys, mail can be encrypted before it leaves your device; the provider only sees armored ciphertext.</li>
+      <li><strong>In transit:</strong> TLS via the operating-system trust roots for all provider traffic.</li>
+      <li><strong>Rendering:</strong> inbound HTML is sanitized in Rust before display, then rendered inside a sandboxed frame with no script execution.</li>
+    </ul>
+    <p>Ahom cannot defend against every threat. A compromised operating system can read decrypted mail and unlocked keys from process memory while the app is running, and a breach at your mail provider exposes anything the provider stores unencrypted.</p>
+
+    <h2 id="rights">Your rights and controls</h2>
+    <p>Because Ahom holds nothing about you on infrastructure it controls, the usual “request a copy of my data / delete my data” workflow does not apply — there is nothing on the Ahom side to retrieve or erase. What you control on your own device:</p>
+    <ul>
+      <li><strong>Export / back up.</strong> Export writes a copy of your mail to a standard <code>.mbox</code> file at a location you choose — a portable backup you own, importable into other mail clients. It is a local file write you initiate; nothing leaves your device.</li>
+      <li><strong>Clear local caches.</strong> Clear derived caches (AI summaries, the search index, meaning-search vectors, fetched sender logos) individually or all at once. Each is regenerated from mail already on your device, so clearing is safe.</li>
+      <li><strong>Disconnect an account.</strong> Wipes that account’s credentials from the keychain; a per-account “remove data” also deletes that account’s cached mail.</li>
+      <li><strong>Delete everything.</strong> Uninstall the app and remove the application-data directory. That deletes every byte of mail and every credential Ahom has ever held.</li>
+    </ul>
+    <p>For the data your provider holds, use the provider’s own privacy controls — that data is governed by them, not by Ahom.</p>
+
+    <h2 id="logs">Logs</h2>
+    <p>Ahom writes a small amount of operational information to standard error during normal operation: performance markers, authentication-flow milestones, error messages from the OS or your mail providers, and counts. On a normal install this stream is not redirected to a file — the logs vanish when the app exits.</p>
+    <p>It does <strong>not</strong> log token contents, mail bodies, mail subjects, attachment payloads, PGP keys, passphrases, or recipient addresses. Diagnostic lines that would touch any of those are gated behind opt-in environment variables that are off by default, including in shipping release builds.</p>
+    <p>Update payloads are signed at build time and verified on your device against a public key shipped with the app, so an update that was not produced by our release pipeline is rejected before it is applied. No shipped build polls for updates in the background.</p>
+
+    <h2 id="gdpr">International users and GDPR</h2>
+    <p>Ahom does not act as a controller or processor of personal data under the GDPR, because it does not collect, store, transmit, or otherwise process personal data on infrastructure it controls. The mail providers you connect are independent controllers for the data they hold. If you are subject to data-residency rules, mail content lives wherever your device lives — there are no cross-border transfers initiated by Ahom itself.</p>
+
+    <h2 id="children">Children</h2>
+    <p>Ahom is not directed at children under 13 (under 16 where that is the threshold) and does not knowingly collect information from children, because it does not knowingly collect information from anyone. If you are under the relevant age in your jurisdiction, do not use the app.</p>
+
+    <h2 id="changes">Changes to this policy</h2>
+    <p>This policy can change. New versions are published at this address with the version number and effective date at the top bumped. If a future version of the app introduces any feature that would cause data to leave your device by default, that change will be called out explicitly in the release notes for the version that ships it.</p>
+
+    <h2 id="contact">Contact</h2>
+    <ul>
+      <li>General: <a href="mailto:hello@ahom.com">hello@ahom.com</a></li>
+      <li>Beta &amp; issues: <a href="https://github.com/IAmAB-Dev/ahom-beta/issues">github.com/IAmAB-Dev/ahom-beta/issues</a></li>
+    </ul>
+    <p>For security disclosures, prefer the issue tracker with a <code>security</code> label, or the contact email if public disclosure would put users at risk before a fix lands.</p>
+
+    <a class="backlink" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+      Back to ahom.com
+    </a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <div class="wordmark">ahom<span class="dot">.</span></div>
+        <p class="foot__etym"><span class="word">Ahom</span> (ah-HOHM) is Twi for <em>rest, repose, breath</em> — the exhale you take when you set something down.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#download">Download</a></li>
+          <li><a href="https://github.com/IAmAB-Dev/ahom-beta#readme">Setup guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy statement</a></li>
+          <li><a href="terms.html">Terms of service</a></li>
+          <li><a href="mailto:hello@ahom.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 Plenith LLC</span><span class="sep"></span>
+      <span>Ahom is a product of Plenith LLC</span><span class="sep"></span>
+      <span>Made with care, on-device</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement, btn = document.getElementById("themeBtn"), icon = document.getElementById("themeIcon");
+    var sun = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon = '<path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path>';
+    function saved() { try { return localStorage.getItem("ahom-theme"); } catch (e) { return null; } }
+    function systemDark() { return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
+    function apply(t) {
+      if (t === "dark" || t === "light") root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
+      var dark = t ? t === "dark" : systemDark();
+      icon.innerHTML = dark ? moon : sun;
+    }
+    apply(saved());
+    btn.addEventListener("click", function () {
+      var curDark = root.getAttribute("data-theme") ? root.getAttribute("data-theme") === "dark" : systemDark();
+      var next = curDark ? "light" : "dark";
+      try { localStorage.setItem("ahom-theme", next); } catch (e) {}
+      apply(next);
+    });
+    var nav = document.getElementById("nav");
+    var onScroll = function () { nav.setAttribute("data-stuck", String(window.scrollY > 8)); };
+    onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
+  })();
+</script>
+</body>
+</html>

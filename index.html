@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahom — private email, on your device</title>
+<meta name="description" content="Ahom is a local-first, privacy-first desktop email client by Plenith LLC. Your mail lives encrypted on your own machine, with on-device AI that never touches the cloud.">
+<meta name="theme-color" content="#0d1017">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ahom — private email, on your device">
+<meta property="og:description" content="A local-first desktop email client. Your mail lives encrypted on your own machine — no Ahom server, no cloud AI, nothing phoning home.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%E2%9C%89%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,380;1,6..72,500&display=swap">
+<style>
+  :root {
+    --ground: #f4f6f8;
+    --surface: #ffffff;
+    --surface-2: #eceff4;
+    --ink: #161a21;
+    --ink-soft: #545c6a;
+    --ink-faint: #7d8593;
+    --line: rgba(20, 26, 34, 0.11);
+    --line-strong: rgba(20, 26, 34, 0.18);
+    --accent: #2c5fcf;
+    --accent-soft: rgba(44, 95, 207, 0.10);
+    --coral: #d9523a;
+    --coral-ink: #ffffff;
+    --violet: #6a4bd0;
+    --violet-soft: rgba(106, 75, 208, 0.12);
+    --good: #3f9d68;
+    --good-soft: rgba(63, 157, 104, 0.13);
+    --shadow: 0 1px 2px rgba(16, 22, 34, .04), 0 12px 34px -14px rgba(16, 22, 34, .22);
+    --shadow-lift: 0 2px 4px rgba(16, 22, 34, .05), 0 30px 60px -24px rgba(16, 22, 34, .34);
+    --glow-a: rgba(217, 82, 58, 0.16);
+    --glow-b: rgba(44, 95, 207, 0.16);
+    --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --maxw: 1120px;
+    --step--1: clamp(.82rem, .8rem + .1vw, .9rem);
+    --step-0: clamp(1rem, .96rem + .18vw, 1.09rem);
+    --step-1: clamp(1.2rem, 1.1rem + .4vw, 1.45rem);
+    --step-2: clamp(1.55rem, 1.3rem + .9vw, 2.1rem);
+    --step-3: clamp(2.1rem, 1.6rem + 2vw, 3.4rem);
+    --step-4: clamp(2.7rem, 1.9rem + 3.4vw, 4.9rem);
+  }
+  :root:not([data-theme="light"]) { color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #0d1017; --surface: #141922; --surface-2: #1b2130;
+      --ink: #eef1f6; --ink-soft: #9aa5b6; --ink-faint: #717c8d;
+      --line: rgba(255, 255, 255, 0.09); --line-strong: rgba(255, 255, 255, 0.16);
+      --accent: #5f8bff; --accent-soft: rgba(95, 139, 255, 0.14);
+      --coral: #ff6a4d; --coral-ink: #1a0f0c;
+      --violet: #c4a7ff; --violet-soft: rgba(196, 167, 255, 0.15);
+      --good: #5fbf85; --good-soft: rgba(95, 191, 133, 0.15);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 16px 40px -18px rgba(0, 0, 0, .7);
+      --shadow-lift: 0 2px 6px rgba(0, 0, 0, .34), 0 40px 70px -28px rgba(0, 0, 0, .8);
+      --glow-a: rgba(255, 106, 77, 0.20); --glow-b: rgba(95, 139, 255, 0.18);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #0d1017; --surface: #141922; --surface-2: #1b2130;
+    --ink: #eef1f6; --ink-soft: #9aa5b6; --ink-faint: #717c8d;
+    --line: rgba(255, 255, 255, 0.09); --line-strong: rgba(255, 255, 255, 0.16);
+    --accent: #5f8bff; --accent-soft: rgba(95, 139, 255, 0.14);
+    --coral: #ff6a4d; --coral-ink: #1a0f0c;
+    --violet: #c4a7ff; --violet-soft: rgba(196, 167, 255, 0.15);
+    --good: #5fbf85; --good-soft: rgba(95, 191, 133, 0.15);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 16px 40px -18px rgba(0, 0, 0, .7);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, .34), 0 40px 70px -28px rgba(0, 0, 0, .8);
+    --glow-a: rgba(255, 106, 77, 0.20); --glow-b: rgba(95, 139, 255, 0.18);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(1.15rem, .6rem + 2.4vw, 2.5rem); }
+  a { color: inherit; }
+  ::selection { background: var(--accent-soft); }
+  :focus-visible { outline: 2.5px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wordmark { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--ink); text-transform: lowercase; display: inline-flex; align-items: baseline; }
+  .wordmark .dot { color: var(--coral); }
+  .nav { position: sticky; top: 0; z-index: 40; background: color-mix(in oklab, var(--ground) 82%, transparent); backdrop-filter: blur(14px) saturate(1.3); border-bottom: 1px solid transparent; transition: border-color .3s; }
+  .nav[data-stuck="true"] { border-bottom-color: var(--line); }
+  .nav__inner { display: flex; align-items: center; gap: 1.2rem; height: 66px; }
+  .nav .wordmark { font-size: 1.5rem; }
+  .nav__links { margin-left: auto; display: flex; align-items: center; gap: .3rem; }
+  .nav__links a { text-decoration: none; color: var(--ink-soft); font-weight: 500; font-size: var(--step--1); padding: .5rem .7rem; border-radius: 8px; transition: color .2s, background .2s; }
+  .nav__links a:hover { color: var(--ink); background: var(--surface-2); }
+  .nav__cta { text-decoration: none; font-weight: 600; font-size: var(--step--1); padding: .5rem .95rem; border-radius: 9px; background: var(--ink); color: var(--ground); transition: transform .15s, opacity .2s; }
+  .nav__cta:hover { opacity: .9; transform: translateY(-1px); }
+  .theme-btn { display: inline-grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink-soft); cursor: pointer; transition: color .2s, border-color .2s; }
+  .theme-btn:hover { color: var(--ink); border-color: var(--line-strong); }
+  .theme-btn svg { width: 17px; height: 17px; }
+  .nav__hide { display: inline; }
+  @media (max-width: 620px) { .nav__hide { display: none; } }
+  .hero { position: relative; overflow: clip; }
+  .hero__glow { position: absolute; inset: -20% -10% auto -10%; height: 620px; z-index: 0; background: radial-gradient(48% 60% at 76% 8%, var(--glow-a), transparent 70%), radial-gradient(50% 55% at 12% 40%, var(--glow-b), transparent 72%); filter: blur(8px); pointer-events: none; }
+  .hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: center; padding-block: clamp(3rem, 2rem + 5vw, 6rem) clamp(3rem, 2rem + 4vw, 5rem); }
+  @media (max-width: 900px) { .hero__inner { grid-template-columns: 1fr; gap: 3rem; } }
+  .eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-size: var(--step--1); font-weight: 600; letter-spacing: .01em; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); padding: .4rem .8rem .4rem .55rem; border-radius: 100px; margin-bottom: 1.6rem; }
+  .eyebrow .pip { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 4px var(--good-soft); }
+  h1.hero__title { font-family: var(--font-display); font-weight: 800; font-size: var(--step-4); line-height: 1.02; letter-spacing: -0.035em; margin: 0 0 1.35rem; text-wrap: balance; }
+  .hero__title .soft { color: var(--ink-soft); }
+  .hero__pitch { font-family: var(--font-serif); font-style: italic; font-weight: 380; font-size: var(--step-2); line-height: 1.28; color: var(--ink); margin: 0 0 1.1rem; max-width: 22ch; text-wrap: balance; }
+  .hero__pitch .u { color: var(--coral); font-style: italic; }
+  .hero__sub { color: var(--ink-soft); font-size: var(--step-1); max-width: 46ch; margin: 0 0 2rem; line-height: 1.5; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; font-weight: 600; font-size: var(--step-0); padding: .8rem 1.3rem; border-radius: 11px; border: 1px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s; }
+  .btn svg { width: 18px; height: 18px; }
+  .btn--primary { background: var(--coral); color: var(--coral-ink); box-shadow: 0 10px 26px -12px color-mix(in oklab, var(--coral) 80%, transparent); }
+  .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -12px color-mix(in oklab, var(--coral) 78%, transparent); }
+  .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .btn--ghost:hover { background: var(--surface); transform: translateY(-2px); }
+  .cta-note { color: var(--ink-faint); font-size: var(--step--1); margin-top: 1rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .cta-note .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); display: inline-block; }
+  .mock { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow-lift); overflow: hidden; transform: rotate(.4deg); }
+  @media (prefers-reduced-motion: no-preference) { .mock { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px) rotate(.4deg); } to { opacity: 1; transform: translateY(0) rotate(.4deg); } }
+  .mock__bar { display: flex; align-items: center; gap: .5rem; padding: .7rem .95rem; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+  .mock__dots { display: flex; gap: .4rem; }
+  .mock__dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); }
+  .mock__bar .wordmark { font-size: 1.05rem; margin-left: auto; opacity: .85; }
+  .mock__body { padding: 1.1rem 1.15rem 1.25rem; }
+  .mock__sender { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; }
+  .brandlogo { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; background: #1e3a6e; color: #fff; flex: none; }
+  .brandlogo svg { width: 19px; height: 19px; }
+  .mock__who { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+  .mock__who b { font-weight: 600; font-size: .95rem; }
+  .mock__who span { font-size: .78rem; color: var(--ink-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .verified { margin-left: auto; display: inline-flex; align-items: center; gap: .3rem; font-size: .72rem; font-weight: 600; color: var(--good); background: var(--good-soft); padding: .26rem .5rem; border-radius: 100px; flex: none; }
+  .verified svg { width: 13px; height: 13px; }
+  .mock__subject { font-weight: 600; font-size: 1.02rem; margin: 0 0 .35rem; }
+  .mock__snippet { color: var(--ink-soft); font-size: .9rem; margin: 0 0 1rem; line-height: 1.5; }
+  .ai-chip { display: flex; align-items: flex-start; gap: .6rem; padding: .7rem .8rem; border-radius: 11px; background: var(--violet-soft); border: 1px solid color-mix(in oklab, var(--violet) 30%, transparent); margin-bottom: .9rem; }
+  .ai-chip svg { width: 16px; height: 16px; color: var(--violet); flex: none; margin-top: 2px; }
+  .ai-chip__t { font-size: .84rem; line-height: 1.45; }
+  .ai-chip__t b { color: var(--violet); font-weight: 600; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: .45rem; }
+  .chip { display: inline-flex; align-items: center; gap: .35rem; font-size: .76rem; font-weight: 500; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); padding: .32rem .6rem; border-radius: 100px; }
+  .chip svg { width: 12px; height: 12px; }
+  .chip.on { color: var(--good); }
+  .chip.on svg { color: var(--good); }
+  section { position: relative; }
+  .band { padding-block: clamp(3.2rem, 2rem + 5vw, 6rem); }
+  .band--tint { background: var(--surface); border-block: 1px solid var(--line); }
+  .kicker { font-size: var(--step--1); font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--coral); margin: 0 0 .9rem; }
+  h2.head { font-family: var(--font-display); font-weight: 800; font-size: var(--step-3); line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 1rem; text-wrap: balance; }
+  .lede { color: var(--ink-soft); font-size: var(--step-1); max-width: 54ch; margin: 0; line-height: 1.5; }
+  .sec-head { max-width: 60ch; margin-bottom: clamp(2rem, 1.4rem + 2vw, 3rem); }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, .4rem + 1.6vw, 1.8rem); }
+  @media (max-width: 820px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar__ic { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); margin-bottom: 1rem; }
+  .pillar__ic svg { width: 21px; height: 21px; }
+  .pillar h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); letter-spacing: -0.02em; margin: 0 0 .5rem; }
+  .pillar p { color: var(--ink-soft); margin: 0; font-size: var(--step-0); line-height: 1.55; }
+  .features { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(.9rem, .4rem + 1.4vw, 1.4rem); }
+  .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 15px; padding: clamp(1.3rem, 1rem + 1vw, 1.9rem); box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .tile--wide { grid-column: span 4; }
+  .tile--tall { grid-column: span 2; }
+  .tile--half { grid-column: span 3; }
+  @media (max-width: 860px) { .features { grid-template-columns: 1fr; } .tile--wide, .tile--tall, .tile--half { grid-column: 1 / -1; } }
+  .tile__ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; margin-bottom: 1rem; flex: none; }
+  .tile__ic svg { width: 20px; height: 20px; }
+  .ic-violet { background: var(--violet-soft); color: var(--violet); }
+  .ic-accent { background: var(--accent-soft); color: var(--accent); }
+  .ic-coral { background: color-mix(in oklab, var(--coral) 15%, transparent); color: var(--coral); }
+  .ic-good { background: var(--good-soft); color: var(--good); }
+  .tile h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); letter-spacing: -0.02em; margin: 0 0 .55rem; }
+  .tile p { color: var(--ink-soft); margin: 0; font-size: var(--step-0); line-height: 1.55; }
+  .tile__list { margin: .9rem 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tile__list li { font-size: .78rem; font-weight: 500; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); padding: .3rem .6rem; border-radius: 8px; }
+  .providers { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.6rem; }
+  .prov { display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; font-size: var(--step--1); background: var(--surface); border: 1px solid var(--line); padding: .55rem .95rem; border-radius: 100px; }
+  .prov .swatch { width: 12px; height: 12px; border-radius: 50%; }
+  .manifesto { text-align: center; max-width: 30ch; margin-inline: auto; }
+  .manifesto p { font-family: var(--font-serif); font-style: italic; font-size: var(--step-3); line-height: 1.22; letter-spacing: -0.01em; margin: 0 0 1.4rem; text-wrap: balance; }
+  .manifesto .u { color: var(--coral); }
+  .manifesto a { color: var(--accent); text-decoration: none; font-family: var(--font-body); font-style: normal; font-weight: 600; font-size: var(--step-0); display: inline-flex; align-items: center; gap: .4rem; }
+  .manifesto a:hover { text-decoration: underline; }
+  .download-card { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-lift); padding: clamp(2rem, 1.4rem + 3vw, 3.6rem); display: grid; grid-template-columns: 1.3fr .7fr; gap: 2.5rem; align-items: center; }
+  .download-card__glow { position: absolute; inset: auto -8% -60% auto; width: 420px; height: 420px; background: radial-gradient(circle, var(--glow-a), transparent 68%); pointer-events: none; }
+  @media (max-width: 780px) { .download-card { grid-template-columns: 1fr; gap: 1.6rem; } }
+  .dl-badges { display: flex; flex-direction: column; gap: .7rem; position: relative; z-index: 1; }
+  .dl-badge { display: flex; align-items: center; gap: .7rem; font-size: var(--step--1); color: var(--ink-soft); }
+  .dl-badge svg { width: 18px; height: 18px; color: var(--good); flex: none; }
+  .dl-badge b { color: var(--ink); font-weight: 600; }
+  footer { border-top: 1px solid var(--line); background: var(--surface); padding-block: clamp(2.6rem, 2rem + 2vw, 3.6rem); }
+  .foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2rem; }
+  @media (max-width: 720px) { .foot { grid-template-columns: 1fr 1fr; } .foot__brand { grid-column: 1 / -1; } }
+  .foot .wordmark { font-size: 1.6rem; margin-bottom: .8rem; }
+  .foot__etym { color: var(--ink-soft); font-size: var(--step--1); max-width: 34ch; line-height: 1.55; }
+  .foot__etym .word { font-family: var(--font-serif); font-style: italic; color: var(--ink); }
+  .foot h4 { font-size: var(--step--1); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-faint); margin: 0 0 1rem; font-weight: 600; }
+  .foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+  .foot a { color: var(--ink-soft); text-decoration: none; font-size: var(--step-0); }
+  .foot a:hover { color: var(--ink); }
+  .foot__legal { margin-top: 2.4rem; padding-top: 1.4rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; color: var(--ink-faint); font-size: var(--step--1); }
+  .reveal { opacity: 1; }
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <span class="wordmark" aria-label="Ahom home">ahom<span class="dot">.</span></span>
+    <div class="nav__links">
+      <a href="#promise" class="nav__hide">Why Ahom</a>
+      <a href="#features" class="nav__hide">Features</a>
+      <a href="#privacy" class="nav__hide">Privacy</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme" title="Switch theme">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a href="#download" class="nav__cta">Download</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="wrap hero__inner">
+    <div class="hero__copy">
+      <span class="eyebrow"><span class="pip"></span> Private email · runs on your device</span>
+      <h1 class="hero__title">Mail that stays <span class="soft">on your device.</span></h1>
+      <p class="hero__pitch">Ahom is the breath you take when you <span class="u">close your inbox.</span></p>
+      <p class="hero__sub">A local-first desktop email client. Your mail lives encrypted on your own machine — no Ahom server, no cloud AI, nothing phoning home.</p>
+      <div class="cta-row">
+        <a href="#download" class="btn btn--primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>
+          Download for Windows
+        </a>
+        <a href="#privacy" class="btn btn--ghost">See how privacy works</a>
+      </div>
+      <p class="cta-note">Signed by Plenith LLC <span class="sep"></span> Windows 10 &amp; 11 <span class="sep"></span> Free public beta</p>
+    </div>
+
+    <div class="hero__art">
+      <div class="mock" role="img" aria-label="The Ahom reader showing a verified message summarized on-device with tracking blocked">
+        <div class="mock__bar">
+          <div class="mock__dots"><i></i><i></i><i></i></div>
+          <span class="wordmark">ahom<span class="dot">.</span></span>
+        </div>
+        <div class="mock__body">
+          <div class="mock__sender">
+            <span class="brandlogo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"></path></svg>
+            </span>
+            <span class="mock__who"><b>First National</b><span>statements@fnbank.com</span></span>
+            <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>DMARC</span>
+          </div>
+          <p class="mock__subject">Your July statement is ready</p>
+          <p class="mock__snippet">Hi Abraham — your monthly statement is available to view. No action is needed…</p>
+          <div class="ai-chip">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.2L19 9l-5.1 1.8L12 16l-1.9-5.2L5 9l5.1-1.8L12 2z"></path></svg>
+            <span class="ai-chip__t"><b>Summarized on your device.</b> Routine statement notice — nothing due, no links to act on.</span>
+          </div>
+          <div class="chip-row">
+            <span class="chip on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>Tracking blocked</span>
+            <span class="chip on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l20 20M10.6 5.1A9 9 0 0121 12s-1 1.8-2.8 3.4M6.6 6.6A9 9 0 003 12s3 6 9 6a8.7 8.7 0 004.3-1.1"></path></svg>Remote images off</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg>Encrypted at rest</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="band band--tint" id="promise">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">The whole point</p>
+      <h2 class="head">There is no Ahom cloud.</h2>
+      <p class="lede">Most mail apps quietly route your inbox through their servers. Ahom doesn't have any. Everything runs where you can see it — on the machine in front of you.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg></div>
+        <h3>Encrypted on your disk</h3>
+        <p>Messages, attachments, and the search index sit in one encrypted database (SQLCipher, AES-256). The key is sealed in your OS keychain — never on our side, because there is no our side.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"></path></svg></div>
+        <h3>AI that never leaves</h3>
+        <p>Summaries, drafts, and natural-language search run against a language model on your own machine. Your email is never sent to a cloud AI service.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg></div>
+        <h3>Nothing phones home</h3>
+        <p>No telemetry, no analytics, no crash pings, no ad SDKs. The binary you install doesn't call us. There's nothing to opt out of, because it was never collecting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">A full inbox, done quietly</p>
+      <h2 class="head">Everything you expect — and the parts that protect you.</h2>
+      <p class="lede">Ahom is a complete mail client, not a privacy demo. It just happens to keep the surveillance out.</p>
+    </div>
+    <div class="features">
+      <div class="tile tile--wide reveal">
+        <div class="tile__ic ic-violet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.2L19 9l-5.1 1.8L12 16l-1.9-5.2L5 9l5.1-1.8L12 2z"></path></svg></div>
+        <h3>On-device AI</h3>
+        <p>Summarize a long thread, ask a plain-English question about a message, or get a smart reply — all running on a local model on your machine. Point it at your own LM Studio or Ollama if you'd rather, or use the bundled engine. The default sends nothing anywhere.</p>
+        <ul class="tile__list"><li>Thread summaries</li><li>Ask a message</li><li>Smart replies</li><li>Natural-language search</li></ul>
+      </div>
+      <div class="tile tile--tall reveal">
+        <div class="tile__ic ic-accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"></path></svg></div>
+        <h3>Smart triage</h3>
+        <p>Mail sorts itself into Priority, Personal, Newsletters, Watch and Quiet — by an on-device classifier that learns from your corrections, not from a server profiling you.</p>
+      </div>
+      <div class="tile tile--half reveal">
+        <div class="tile__ic ic-good"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+        <h3>Security built in</h3>
+        <p>Phishing detection, sender authentication with DMARC and verified-sender logos (BIMI), tracking-pixel blocking, remote-image gating, and PGP encrypt / decrypt when you and your correspondent both have keys.</p>
+        <ul class="tile__list"><li>DMARC + BIMI</li><li>Pixel blocking</li><li>Phishing checks</li><li>PGP</li></ul>
+      </div>
+      <div class="tile tile--half reveal">
+        <div class="tile__ic ic-coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v14H4z"></path><path d="M4 9h16M8 13h8"></path></svg></div>
+        <h3>A calm reader</h3>
+        <p>Formatted mail renders faithfully — no dark-on-dark surprises. Preview PDF, image and text attachments inline, and print or save any message as a typeset PDF.</p>
+        <ul class="tile__list"><li>Inline attachment preview</li><li>Print / Save-as-PDF</li><li>Snooze &amp; send-later</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--tint" id="accounts">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Your accounts, your keys</p>
+      <h2 class="head">Bring the mail you already have.</h2>
+      <p class="lede">Connect several accounts at once, each colour-coded. Credentials are sealed in your operating system's keychain — never in a config file, never on a server.</p>
+    </div>
+    <div class="providers reveal">
+      <span class="prov"><span class="swatch" style="background:#EA4335"></span>Gmail</span>
+      <span class="prov"><span class="swatch" style="background:#3693F3"></span>iCloud</span>
+      <span class="prov"><span class="swatch" style="background:#6001d2"></span>Yahoo</span>
+      <span class="prov"><span class="swatch" style="background:#0067b9"></span>Fastmail</span>
+      <span class="prov"><span class="swatch" style="background:#0078D4"></span>Outlook</span>
+      <span class="prov"><span class="swatch" style="background:#5fbf85"></span>Any IMAP / SMTP</span>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="privacy">
+  <div class="wrap">
+    <div class="manifesto reveal">
+      <p>Ahom talks to your provider and, once, downloads a local AI model. <span class="u">That's the entire network diagram.</span></p>
+      <a href="privacy.html">Read the full privacy statement
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="band band--tint" id="download">
+  <div class="wrap">
+    <div class="download-card reveal">
+      <div class="download-card__glow" aria-hidden="true"></div>
+      <div style="position:relative;z-index:1">
+        <p class="kicker">Download</p>
+        <h2 class="head">Get Ahom for Windows.</h2>
+        <p class="lede" style="margin-bottom:1.6rem">A signed installer, about 25&nbsp;MB. It installs per-user in a few seconds — no administrator prompt — and cleanly over any previous version.</p>
+        <div class="cta-row">
+          <a href="https://github.com/IAmAB-Dev/ahom-beta/releases/latest" class="btn btn--primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>
+            Download the beta
+          </a>
+          <a href="https://github.com/IAmAB-Dev/ahom-beta#readme" class="btn btn--ghost">Setup guide</a>
+        </div>
+        <p class="cta-note">Windows 10 &amp; 11, 64-bit <span class="sep"></span> macOS &amp; Linux to follow</p>
+      </div>
+      <div class="dl-badges">
+        <div class="dl-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg><span><b>Code-signed</b> by Plenith LLC</span></div>
+        <div class="dl-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 015 5v3h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2h1V7a5 5 0 015-5z"></path></svg><span><b>Per-user install</b> — no admin</span></div>
+        <div class="dl-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-6.2-8.6"></path><path d="M22 4L12 14.01l-3-3"></path></svg><span><b>Connect it yourself</b> — no invite needed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <div class="wordmark">ahom<span class="dot">.</span></div>
+        <p class="foot__etym"><span class="word">Ahom</span> (ah-HOHM) is Twi for <em>rest, repose, breath</em> — the exhale you take when you set something down. That's the whole idea.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="https://github.com/IAmAB-Dev/ahom-beta#readme">Setup guide</a></li>
+          <li><a href="https://github.com/IAmAB-Dev/ahom-beta/issues/new">Report a bug</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy statement</a></li>
+          <li><a href="terms.html">Terms of service</a></li>
+          <li><a href="mailto:hello@ahom.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 Plenith LLC</span><span class="sep" style="width:3px;height:3px;border-radius:50%;background:currentColor;display:inline-block"></span>
+      <span>Ahom is a product of Plenith LLC</span><span class="sep" style="width:3px;height:3px;border-radius:50%;background:currentColor;display:inline-block"></span>
+      <span>Made with care, on-device</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("themeBtn");
+    var sun = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+    var moon = '<path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path>';
+    var icon = document.getElementById("themeIcon");
+    function saved() { try { return localStorage.getItem("ahom-theme"); } catch (e) { return null; } }
+    function systemDark() { return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
+    function apply(t) {
+      if (t === "dark" || t === "light") root.setAttribute("data-theme", t);
+      else root.removeAttribute("data-theme");
+      var dark = t ? t === "dark" : systemDark();
+      icon.innerHTML = dark ? moon : sun;
+    }
+    apply(saved());
+    btn.addEventListener("click", function () {
+      var curDark = root.getAttribute("data-theme") ? root.getAttribute("data-theme") === "dark" : systemDark();
+      var next = curDark ? "light" : "dark";
+      try { localStorage.setItem("ahom-theme", next); } catch (e) {}
+      apply(next);
+    });
+    var nav = document.getElementById("nav");
+    var onScroll = function () { nav.setAttribute("data-stuck", String(window.scrollY > 8)); };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    if (!window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+      document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+    } else {
+      document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+    }
+  })();
+</script>
+</body>
+</html>
