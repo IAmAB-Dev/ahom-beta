@@ -20,11 +20,13 @@ Grab **`Ahom_0.1.0_x64-setup.exe`** from the **[latest release](../../releases/l
 
 ### Installing
 1. Run the downloaded `Ahom_0.1.0_x64-setup.exe`.
-2. It's **code-signed by Plenith LLC.** Until the certificate builds up
-   download reputation, Windows SmartScreen may still show a blue "Windows
-   protected your PC" screen — if it does, click **More info → Run anyway.**
-   (You can confirm it's genuine: right-click the file → **Properties →
-   Digital Signatures** → you should see **Plenith LLC**.)
+2. **The "unrecognized app" screen is expected — the app is signed.** Because
+   Ahom is newly released, Windows SmartScreen may show a blue **"Windows
+   protected your PC"** screen the first time you run it. This is about
+   download *reputation*, not safety, and it fades as more people install.
+   Click **More info** → confirm it reads **Publisher: Plenith LLC** → then
+   **Run anyway.** (An *unsigned* app would say "Publisher: Unknown"; this one
+   won't.) It's code-signed by Plenith LLC via SSL.com.
 3. It installs **per-user — no administrator prompt** — in a few seconds, and
    installs cleanly over a previous version.
 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
 <title>Ahom — private email, on your device</title>
 <meta name="description" content="Ahom is a local-first, privacy-first desktop email client by Plenith LLC. Your mail lives encrypted on your own machine, with on-device AI that never touches the cloud.">
 <meta name="theme-color" content="#0d1017">
@@ -99,8 +100,8 @@
   .nav__links a:hover { color: var(--ink); background: var(--surface-2); }
   .nav__cta { text-decoration: none; font-weight: 600; font-size: var(--step--1); padding: .5rem .95rem; border-radius: 9px; background: var(--ink); color: var(--ground); transition: transform .15s, opacity .2s; }
   .nav__cta:hover { opacity: .9; transform: translateY(-1px); }
-  .theme-btn { display: inline-grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink-soft); cursor: pointer; transition: color .2s, border-color .2s; }
-  .theme-btn:hover { color: var(--ink); border-color: var(--line-strong); }
+  .theme-btn { display: inline-grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink-soft); cursor: pointer; transition: color .2s, border-color .2s, transform .2s; }
+  .theme-btn:hover { color: var(--ink); border-color: var(--line-strong); transform: rotate(18deg); }
   .theme-btn svg { width: 17px; height: 17px; }
   .nav__hide { display: inline; }
   @media (max-width: 620px) { .nav__hide { display: none; } }
@@ -117,16 +118,15 @@
   .hero__sub { color: var(--ink-soft); font-size: var(--step-1); max-width: 46ch; margin: 0 0 2rem; line-height: 1.5; }
   .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
   .btn { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; font-weight: 600; font-size: var(--step-0); padding: .8rem 1.3rem; border-radius: 11px; border: 1px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s; }
-  .btn svg { width: 18px; height: 18px; }
+  .btn svg { width: 18px; height: 18px; transition: transform .2s; }
   .btn--primary { background: var(--coral); color: var(--coral-ink); box-shadow: 0 10px 26px -12px color-mix(in oklab, var(--coral) 80%, transparent); }
   .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -12px color-mix(in oklab, var(--coral) 78%, transparent); }
+  .btn--primary:hover svg { transform: translateY(2px); }
   .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
   .btn--ghost:hover { background: var(--surface); transform: translateY(-2px); }
   .cta-note { color: var(--ink-faint); font-size: var(--step--1); margin-top: 1rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
   .cta-note .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); display: inline-block; }
   .mock { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow-lift); overflow: hidden; transform: rotate(.4deg); }
-  @media (prefers-reduced-motion: no-preference) { .mock { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; } }
-  @keyframes rise { from { opacity: 0; transform: translateY(16px) rotate(.4deg); } to { opacity: 1; transform: translateY(0) rotate(.4deg); } }
   .mock__bar { display: flex; align-items: center; gap: .5rem; padding: .7rem .95rem; border-bottom: 1px solid var(--line); background: var(--surface-2); }
   .mock__dots { display: flex; gap: .4rem; }
   .mock__dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); }
@@ -188,6 +188,8 @@
   .manifesto .u { color: var(--coral); }
   .manifesto a { color: var(--accent); text-decoration: none; font-family: var(--font-body); font-style: normal; font-weight: 600; font-size: var(--step-0); display: inline-flex; align-items: center; gap: .4rem; }
   .manifesto a:hover { text-decoration: underline; }
+  .manifesto a svg { transition: transform .2s; }
+  .manifesto a:hover svg { transform: translateX(3px); }
   .download-card { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-lift); padding: clamp(2rem, 1.4rem + 3vw, 3.6rem); display: grid; grid-template-columns: 1.3fr .7fr; gap: 2.5rem; align-items: center; }
   .download-card__glow { position: absolute; inset: auto -8% -60% auto; width: 420px; height: 420px; background: radial-gradient(circle, var(--glow-a), transparent 68%); pointer-events: none; }
   @media (max-width: 780px) { .download-card { grid-template-columns: 1fr; gap: 1.6rem; } }
@@ -208,8 +210,103 @@
   .foot__legal { margin-top: 2.4rem; padding-top: 1.4rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; color: var(--ink-faint); font-size: var(--step--1); }
   .reveal { opacity: 1; }
   @media (prefers-reduced-motion: no-preference) {
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
-    .reveal.in { opacity: 1; transform: none; }
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+    .js .reveal.in { opacity: 1; transform: none; }
+  }
+
+  /* ===========================================================
+     Motion & interaction — calm, "breathing" (2026-09-10).
+     Every continuous/entrance animation is gated behind
+     prefers-reduced-motion: no-preference; the page is fully
+     legible and usable with motion off.
+     =========================================================== */
+  .hero__glow, .mock { transition: translate .3s ease; }   /* smooth pointer parallax; JS sets `translate` */
+  @media (prefers-reduced-motion: no-preference) {
+    /* Ambient breathing hero glow — a slow, held breath. */
+    .hero__glow { animation: glowBreath 17s ease-in-out infinite; }
+    @keyframes glowBreath {
+      0%, 100% { transform: translateY(0) scale(1);      opacity: .82; }
+      50%      { transform: translateY(-16px) scale(1.07); opacity: 1; }
+    }
+    /* The hero reader panel rises in, then floats gently forever. */
+    .mock { animation: rise .8s cubic-bezier(.2,.7,.2,1) both, floaty 7.5s ease-in-out 1s infinite; }
+    @keyframes rise  { from { opacity: 0; transform: translateY(16px) rotate(.4deg); } to { opacity: 1; transform: translateY(0) rotate(.4deg); } }
+    @keyframes floaty{ 0%,100% { transform: translateY(0) rotate(.4deg); } 50% { transform: translateY(-9px) rotate(.4deg); } }
+    /* The "summarized on your device" chip lands a beat after the panel. */
+    .mock .ai-chip { animation: chipIn .6s ease both 1s; }
+    @keyframes chipIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+    /* Staggered scroll reveals inside the grids. */
+    .pillars > .reveal:nth-child(2), .features > .reveal:nth-child(2), .shots > .reveal:nth-child(2) { transition-delay: .09s; }
+    .pillars > .reveal:nth-child(3), .features > .reveal:nth-child(3), .shots > .reveal:nth-child(3) { transition-delay: .18s; }
+    .features > .reveal:nth-child(4) { transition-delay: .27s; }
+  }
+
+  /* Hover micro-interactions (intent-driven — fine with reduced motion). */
+  .tile { transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s, border-color .28s; }
+  .tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); border-color: var(--line-strong); }
+  .tile__ic { transition: transform .28s cubic-bezier(.2,.7,.2,1); }
+  .tile:hover .tile__ic { transform: scale(1.09) rotate(-4deg); }
+  .pillar__ic { transition: transform .28s cubic-bezier(.2,.7,.2,1); }
+  .pillar:hover .pillar__ic { transform: translateY(-3px) scale(1.06); }
+  .prov { transition: transform .18s ease, border-color .18s ease; }
+  .prov:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+  .prov .swatch { transition: transform .18s ease; }
+  .prov:hover .swatch { transform: scale(1.35); }
+
+  /* ---- "See it in action" gallery ---- */
+  .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, .5rem + 1.5vw, 1.6rem); }
+  @media (max-width: 900px) { .shots { grid-template-columns: 1fr; max-width: 30rem; margin-inline: auto; } }
+  .shot { margin: 0; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s; }
+  .shot:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+  .shot__frame { position: relative; aspect-ratio: 16 / 10; background: var(--surface-2); overflow: hidden; border-bottom: 1px solid var(--line); }
+  .shot__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .shot__frame .is-dark { display: none; }
+  :root[data-theme="dark"] .shot__frame .is-light { display: none; }
+  :root[data-theme="dark"] .shot__frame .is-dark { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .shot__frame .is-light { display: none; }
+    :root:not([data-theme="light"]) .shot__frame .is-dark { display: block; }
+  }
+  .shot__ph { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 1rem; color: var(--ink-faint); font-size: var(--step--1); font-weight: 500;
+    background: repeating-linear-gradient(45deg, var(--surface-2), var(--surface-2) 11px, var(--surface) 11px, var(--surface) 22px); }
+  .shot__cap { padding: .85rem 1.05rem 1.05rem; }
+  .shot__cap b { display: block; font-family: var(--font-display); font-weight: 700; font-size: var(--step-0); letter-spacing: -0.01em; color: var(--ink); margin-bottom: .12rem; }
+  .shot__cap span { color: var(--ink-soft); font-size: var(--step--1); }
+
+  /* ---- hero product screenshot (a real capture, replaces the drawn mock) ---- */
+  .hero-shot { position: relative; border: 1px solid var(--line-strong); border-radius: 14px; box-shadow: var(--shadow-lift); overflow: hidden; transform: rotate(.4deg); background: var(--surface-2); transition: translate .3s ease; }
+  .hero-shot img { display: block; width: 100%; height: auto; }
+  .hero-shot .is-dark { display: none; }
+  :root[data-theme="dark"] .hero-shot .is-light { display: none; }
+  :root[data-theme="dark"] .hero-shot .is-dark { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .hero-shot .is-light { display: none; }
+    :root:not([data-theme="light"]) .hero-shot .is-dark { display: block; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-shot { animation: rise .8s cubic-bezier(.2,.7,.2,1) both, floaty 7.5s ease-in-out 1s infinite; }
+  }
+
+  /* ---- self-drawing "network diagram" (the whole network, literally) ---- */
+  .netwrap { max-width: 600px; margin: 1.9rem auto 0; }
+  .netdiagram { width: 100%; height: auto; overflow: visible; }
+  .netdiagram .nd-line { fill: none; stroke: var(--line-strong); stroke-width: 2; stroke-linecap: round; }
+  .netdiagram .nd-line--once { stroke: var(--coral); stroke-dasharray: 6 6; }
+  .netdiagram .nd-node rect { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1.5; }
+  .netdiagram .nd-node.is-device rect { fill: var(--accent-soft); stroke: var(--accent); }
+  .netdiagram .nd-t { fill: var(--ink); font: 700 13px var(--font-display); }
+  .netdiagram .nd-s { fill: var(--ink-soft); font: 500 10.5px var(--font-body); }
+  .netdiagram .nd-once { fill: var(--coral); font: 700 9px var(--font-body); letter-spacing: .1em; }
+  @media (prefers-reduced-motion: no-preference) {
+    .js .netdiagram .nd-solid { stroke-dasharray: 90; stroke-dashoffset: 90; }
+    .js .netdiagram .nd-node, .js .netdiagram .nd-line--once, .js .netdiagram .nd-once { opacity: 0; }
+    .reveal.in .netdiagram .nd-solid { transition: stroke-dashoffset .9s ease .3s; stroke-dashoffset: 0; }
+    .reveal.in .netdiagram .nd-node { transition: opacity .5s ease; opacity: 1; }
+    .reveal.in .netdiagram .nd-node.is-device { transition-delay: 0s; }
+    .reveal.in .netdiagram .nd-node.is-provider { transition-delay: .15s; }
+    .reveal.in .netdiagram .nd-node.is-model { transition-delay: 1s; }
+    .reveal.in .netdiagram .nd-line--once { transition: opacity .5s ease .95s; opacity: 1; }
+    .reveal.in .netdiagram .nd-once { transition: opacity .5s ease 1.3s; opacity: 1; }
   }
 </style>
 </head>
@@ -220,6 +317,7 @@
     <div class="nav__links">
       <a href="#promise" class="nav__hide">Why Ahom</a>
       <a href="#features" class="nav__hide">Features</a>
+      <a href="#in-action" class="nav__hide">See it</a>
       <a href="#privacy" class="nav__hide">Privacy</a>
       <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme" title="Switch theme">
         <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
@@ -248,31 +346,9 @@
     </div>
 
     <div class="hero__art">
-      <div class="mock" role="img" aria-label="The Ahom reader showing a verified message summarized on-device with tracking blocked">
-        <div class="mock__bar">
-          <div class="mock__dots"><i></i><i></i><i></i></div>
-          <span class="wordmark">ahom<span class="dot">.</span></span>
-        </div>
-        <div class="mock__body">
-          <div class="mock__sender">
-            <span class="brandlogo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"></path></svg>
-            </span>
-            <span class="mock__who"><b>First National</b><span>statements@fnbank.com</span></span>
-            <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>DMARC</span>
-          </div>
-          <p class="mock__subject">Your July statement is ready</p>
-          <p class="mock__snippet">Hi Abraham — your monthly statement is available to view. No action is needed…</p>
-          <div class="ai-chip">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.2L19 9l-5.1 1.8L12 16l-1.9-5.2L5 9l5.1-1.8L12 2z"></path></svg>
-            <span class="ai-chip__t"><b>Summarized on your device.</b> Routine statement notice — nothing due, no links to act on.</span>
-          </div>
-          <div class="chip-row">
-            <span class="chip on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>Tracking blocked</span>
-            <span class="chip on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l20 20M10.6 5.1A9 9 0 0121 12s-1 1.8-2.8 3.4M6.6 6.6A9 9 0 003 12s3 6 9 6a8.7 8.7 0 004.3-1.1"></path></svg>Remote images off</span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg>Encrypted at rest</span>
-          </div>
-        </div>
+      <div class="hero-shot" role="img" aria-label="The Ahom desktop app: a message open in the reader, summarized on-device, with remote images held back">
+        <img class="is-light" src="shots/reader-light.png" width="1440" height="900" alt="The Ahom desktop email app with a message open in the reader">
+        <img class="is-dark" src="shots/reader-dark.png" width="1440" height="900" alt="The Ahom desktop email app in dark mode">
       </div>
     </div>
   </div>
@@ -340,7 +416,40 @@
   </div>
 </section>
 
-<section class="band band--tint" id="accounts">
+<section class="band band--tint" id="in-action">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">See it in action</p>
+      <h2 class="head">The whole app, on your machine.</h2>
+      <p class="lede">A real inbox, a calm reader, on-device AI — a native desktop app, not a web dashboard. Here's what you actually get.</p>
+    </div>
+    <div class="shots">
+      <figure class="shot reveal">
+        <div class="shot__frame">
+          <img class="is-light" src="shots/inbox-light.png" width="1440" height="900" loading="lazy" alt="The Ahom inbox sorted into Priority, Personal, Watch, Newsletters and Quiet">
+          <img class="is-dark" src="shots/inbox-dark.png" width="1440" height="900" loading="lazy" alt="The Ahom inbox in dark mode">
+        </div>
+        <figcaption class="shot__cap"><b>Smart inbox</b><span>Priority · Personal · Watch · Newsletters, sorted on-device.</span></figcaption>
+      </figure>
+      <figure class="shot reveal">
+        <div class="shot__frame">
+          <img class="is-light" src="shots/ai-light.png" width="1440" height="900" loading="lazy" alt="Ahom summarizing an email thread on-device">
+          <img class="is-dark" src="shots/ai-dark.png" width="1440" height="900" loading="lazy" alt="Ahom on-device AI summary in dark mode">
+        </div>
+        <figcaption class="shot__cap"><b>On-device AI</b><span>Summaries &amp; smart replies — the model runs on your machine.</span></figcaption>
+      </figure>
+      <figure class="shot reveal">
+        <div class="shot__frame">
+          <img class="is-light" src="shots/today-light.png" width="1440" height="900" loading="lazy" alt="The Ahom Today morning brief — agenda and what needs your attention">
+          <img class="is-dark" src="shots/today-dark.png" width="1440" height="900" loading="lazy" alt="The Ahom Today view in dark mode">
+        </div>
+        <figcaption class="shot__cap"><b>Your day, focused</b><span>The Today view — what actually needs you now.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="accounts">
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="kicker">Your accounts, your keys</p>
@@ -358,7 +467,7 @@
   </div>
 </section>
 
-<section class="band" id="privacy">
+<section class="band band--tint" id="privacy">
   <div class="wrap">
     <div class="manifesto reveal">
       <p>Ahom talks to your provider and, once, downloads a local AI model. <span class="u">That's the entire network diagram.</span></p>
@@ -366,10 +475,32 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </a>
     </div>
+    <div class="netwrap reveal" aria-hidden="true">
+      <svg class="netdiagram" viewBox="0 0 600 176" xmlns="http://www.w3.org/2000/svg">
+        <line class="nd-line nd-solid" x1="165" y1="92" x2="225" y2="92"></line>
+        <line class="nd-line nd-line--once" x1="375" y1="92" x2="435" y2="92"></line>
+        <text class="nd-once" x="405" y="80" text-anchor="middle">ONCE</text>
+        <g class="nd-node is-provider">
+          <rect x="15" y="60" width="150" height="64" rx="13"></rect>
+          <text class="nd-t" x="90" y="88" text-anchor="middle">Your provider</text>
+          <text class="nd-s" x="90" y="106" text-anchor="middle">Gmail · iCloud · IMAP</text>
+        </g>
+        <g class="nd-node is-device">
+          <rect x="225" y="60" width="150" height="64" rx="13"></rect>
+          <text class="nd-t" x="300" y="88" text-anchor="middle">Your device</text>
+          <text class="nd-s" x="300" y="106" text-anchor="middle">Ahom runs here</text>
+        </g>
+        <g class="nd-node is-model">
+          <rect x="435" y="60" width="150" height="64" rx="13"></rect>
+          <text class="nd-t" x="510" y="88" text-anchor="middle">AI model</text>
+          <text class="nd-s" x="510" y="106" text-anchor="middle">downloaded once</text>
+        </g>
+      </svg>
+    </div>
   </div>
 </section>
 
-<section class="band band--tint" id="download">
+<section class="band" id="download">
   <div class="wrap">
     <div class="download-card reveal">
       <div class="download-card__glow" aria-hidden="true"></div>
@@ -385,6 +516,7 @@
           <a href="https://github.com/IAmAB-Dev/ahom-beta#readme" class="btn btn--ghost">Setup guide</a>
         </div>
         <p class="cta-note">Windows 10 &amp; 11, 64-bit <span class="sep"></span> macOS &amp; Linux to follow</p>
+        <p class="cta-note" style="margin-top:.45rem">First run, Windows may show an <b>“unrecognized app”</b> notice — click <b>More info → Run anyway</b>. It's signed by Plenith LLC; the prompt just hasn't built reputation yet.</p>
       </div>
       <div class="dl-badges">
         <div class="dl-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg><span><b>Code-signed</b> by Plenith LLC</span></div>
@@ -450,17 +582,40 @@
       try { localStorage.setItem("ahom-theme", next); } catch (e) {}
       apply(next);
     });
+
     var nav = document.getElementById("nav");
     var onScroll = function () { nav.setAttribute("data-stuck", String(window.scrollY > 8)); };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    if (!window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
       }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
       document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
     } else {
       document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+    }
+
+    // Subtle pointer parallax on the hero — desktop pointers, motion on only.
+    if (!reduce && window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
+      var hero = document.querySelector(".hero");
+      var glow = document.querySelector(".hero__glow");
+      var mock = document.querySelector(".hero-shot");
+      if (hero) {
+        hero.addEventListener("mousemove", function (e) {
+          var r = hero.getBoundingClientRect();
+          var dx = (e.clientX - r.left) / r.width - 0.5;
+          var dy = (e.clientY - r.top) / r.height - 0.5;
+          if (glow) glow.style.translate = (dx * 22).toFixed(1) + "px " + (dy * 16).toFixed(1) + "px";
+          if (mock) mock.style.translate = (dx * -14).toFixed(1) + "px " + (dy * -10).toFixed(1) + "px";
+        }, { passive: true });
+        hero.addEventListener("mouseleave", function () {
+          if (glow) glow.style.translate = "";
+          if (mock) mock.style.translate = "";
+        });
+      }
     }
   })();
 </script>
