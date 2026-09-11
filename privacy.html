@@ -36,8 +36,8 @@
     <h1 class="legal-title">Privacy statement</h1>
     <p class="legal-lede">Ahom is a desktop mail client that runs entirely on your device. There is no Ahom server, no Ahom account, and no Ahom backend in the data path — so most of this document is about the things Ahom deliberately does <em>not</em> do.</p>
     <div class="legal-meta">
-      <span class="tag">Version <b>1.9</b></span>
-      <span class="tag">Effective <b>September 5, 2026</b></span>
+      <span class="tag">Version <b>1.10</b></span>
+      <span class="tag">Effective <b>September 10, 2026</b></span>
       <span class="tag">A product of <b>Plenith&nbsp;LLC</b></span>
     </div>
   </div>
@@ -70,6 +70,11 @@
       <p>Ahom collects nothing about you. Your mail is stored, encrypted, on your own machine. AI features run on your device. Nothing is sent to Ahom, because there is no Ahom server to send it to. If a section below sounds short, it is short on purpose — the substance is “Ahom does not do that thing.”</p>
     </div>
 
+    <div class="callout">
+      <span class="callout__label">What changed in 1.10</span>
+      <p>Two tightenings of the same boundary — data leaving the device without a clear local approval. A shared-drafts relay that is not on this machine now needs its own <strong>“Allow remote relay”</strong> opt-in, even when the relay address arrived inside an invite. And the “is this local?” check behind that switch and behind <strong>“Allow remote AI”</strong> got stricter: only <code>localhost</code>, <code>127.0.0.0/8</code> and <code>::1</code> count as this device; <code>.local</code> / <code>.lan</code> names and link-local addresses no longer do. Nothing makes more data leave the device by default — if anything, less does.</p>
+    </div>
+
     <h2 id="collect">What Ahom collects</h2>
     <p>Ahom collects nothing about you. There is no telemetry, no analytics, no crash reporting, no usage metrics, no install pings, and no remote configuration service. The binary you install does not phone home.</p>
     <p>The app reads, writes, displays, indexes, and stores mail on your device, on your behalf, using credentials you supply. None of that data is transmitted to any infrastructure operated by Ahom or Plenith LLC, because no such infrastructure exists.</p>
@@ -91,7 +96,7 @@
     <p>Local AI features (summary, draft, natural-language search, smart-inbox classification) run against a language model on your own machine. The app’s <strong>Engine</strong> setting controls which runtime serves them:</p>
     <ul>
       <li><strong>Embedded</strong> (default) — the model is loaded inside the app’s own process and runs inline. There is no HTTP listener on this path: no socket the OS, another process, or a port scanner could observe. No prompt, message, or response leaves the device.</li>
-      <li><strong>External</strong> — you pin the app to your own local runtime (LM Studio, Ollama, or another OpenAI-compatible endpoint). Pointing it at a non-loopback URL is the only setting that causes AI payloads to leave the device, and a per-feature badge surfaces that before any call.</li>
+      <li><strong>External</strong> — you pin the app to your own local runtime (LM Studio, Ollama, or another OpenAI-compatible endpoint). Pointing it at a non-loopback URL is the only setting that causes AI payloads to leave the device: it needs the separate <strong>“Allow remote AI”</strong> opt-in, and a per-feature badge surfaces it before any call. “On this device” means exactly <code>localhost</code>, <code>127.0.0.0/8</code> or <code>::1</code> — a <code>.local</code> / <code>.lan</code> hostname or a link-local address names <em>some</em> machine on your network, not necessarily this one, so those count as remote.</li>
     </ul>
     <p>In every case other than a non-loopback External URL, AI traffic stays on the device — either as in-process function calls or as loopback HTTP to a local runtime on your own machine.</p>
 
@@ -101,7 +106,7 @@
       <li><strong>Mail providers you connected</strong> — Gmail, Microsoft Graph, and the IMAP / SMTP servers you configured. Traffic on this path is what every mail client sends: authenticated API and mail-protocol sessions over TLS.</li>
       <li><strong>A local AI endpoint (External engine only)</strong> — HTTP calls to whatever base URL you configured, loopback by default. The Embedded engine uses no HTTP at all. The default configuration sends nothing.</li>
       <li><strong>Model downloads</strong> — the local chat model, and the optional semantic-search embedding model, are fetched once from a public model host as ordinary anonymous HTTPS downloads, each pinned to a SHA-256 the app verifies. Neither request carries an account, an identifier, information about you, or anything about your mail.</li>
-      <li><strong>A shared-drafts relay you configure (optional)</strong> — if you use real-time draft collaboration, change data is end-to-end encrypted (AES-256-GCM) under a key the relay never sees; the relay only routes ciphertext. There is no Ahom-operated relay — you self-host or trust one you choose, and the default install has none.</li>
+      <li><strong>A shared-drafts relay (optional)</strong> — if you use real-time draft collaboration, change data is end-to-end encrypted (AES-256-GCM) under a key the relay never sees; the relay only routes ciphertext. The app connects to a relay automatically only when it resolves to this machine (<code>localhost</code>, <code>127.0.0.0/8</code>, <code>::1</code>). Any other relay — including one named inside a workspace invite someone sent you — needs the <strong>“Allow remote relay”</strong> switch in Settings → Collaboration, which is off by default; until you turn it on, a shared draft pointed at a remote relay simply shows as offline. There is no Ahom-operated relay — you self-host or trust one you choose, and the default install has none.</li>
       <li><strong>Verified sender logos (BIMI), when enabled</strong> — for a sender whose message passed authentication, the app fetches that organization’s published logo from the organization’s own server, never through any third-party aggregator. See below.</li>
     </ol>
     <p>There are no advertising networks, no third-party SDKs, no fingerprinters, no identifiers, and no marketing pixels in the app.</p>
