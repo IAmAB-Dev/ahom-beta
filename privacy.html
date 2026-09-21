@@ -36,8 +36,8 @@
     <h1 class="legal-title">Privacy statement</h1>
     <p class="legal-lede">Ahom is a desktop mail client that runs entirely on your device. There is no Ahom server, no Ahom account, and no Ahom backend in the data path — so most of this document is about the things Ahom deliberately does <em>not</em> do.</p>
     <div class="legal-meta">
-      <span class="tag">Version <b>1.15</b></span>
-      <span class="tag">Effective <b>September 20, 2026</b></span>
+      <span class="tag">Version <b>1.16</b></span>
+      <span class="tag">Effective <b>September 21, 2026</b></span>
       <span class="tag">A product of <b>Plenith&nbsp;LLC</b></span>
     </div>
   </div>
@@ -71,9 +71,10 @@
     </div>
 
     <div class="callout">
-      <span class="callout__label">What changed since 1.10 (now 1.15)</span>
-      <p>Five versions of additions and corrections since 1.10 — each one either added a disclosure or tightened a boundary; none made more data leave the device by default.</p>
+      <span class="callout__label">What changed since 1.10 (now 1.16)</span>
+      <p>Six versions of additions and corrections since 1.10 — each one either added a disclosure, tightened a boundary, or fixed the wording; none made more data leave the device by default.</p>
       <ul>
+        <li><strong>1.16 — a wording correction.</strong> The full statement’s description of the on-device chat model was brought up to date (it is larger than an earlier revision stated, as of app version 0.2.14). Nothing about how the app works, or what leaves your device, changed.</li>
         <li><strong>1.15 — inline images render offline.</strong> Images an email carries <em>inside</em> the message (referenced as <code>cid:</code> — the sender’s own logo or illustrations, not fetched from the internet) are now cached with the message body in the same encrypted local database, so they display and keep displaying offline. No new network request; remote images an email tries to load from the internet stay blocked by default, exactly as before.</li>
         <li><strong>1.14 — local crash logs.</strong> A fatal error now writes a diagnostic file under your app-data folder. It never leaves your device — see <a href="#logs">Logs</a>.</li>
         <li><strong>1.13 — the update check is disclosed.</strong> Production builds check GitHub Releases for a newer version (about 15 seconds after launch, then roughly every 6 hours) by fetching one public, signed manifest over HTTPS — it sends nothing about you, and never downloads or installs without your action. This corrects an earlier line that said no shipped build checks for updates. See <a href="#logs">Logs</a>.</li>
